@@ -193,7 +193,16 @@ $.magnificPopup.registerModule('image', {
 					img.alt = item.el.find('img').attr('alt');
 				}
 				item.img = $(img).on('load.mfploader', onLoadComplete).on('error.mfploader', onLoadError);
+				if(item.el && item.el.find('img').length) {
+					listimg = item.el.find('img');
+					if(listimg.attr("srcset") !== undefined){
+						img.srcset = listimg.attr("srcset");
+					}
+				}
 				img.src = item.src;
+				
+				// Optional: 
+				// window.picturefill();
 
 				// without clone() "error" event is not firing when IMG is replaced by new IMG
 				// TODO: find a way to avoid such cloning

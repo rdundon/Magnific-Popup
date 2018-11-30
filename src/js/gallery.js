@@ -154,7 +154,17 @@ $.magnificPopup.registerModule('gallery', {
 					item.hasSize = true;
 					item.loadError = true;
 					_mfpTrigger('LazyLoadError', item);
-				}).attr('src', item.src);
+				});
+				if(item.el && item.el.find('img').length) {
+					listimg = item.el.find('img');
+					if(listimg.attr("srcset") !== undefined){
+						item.img.attr("srcset", listimg.attr("srcset"));
+					}
+				}
+				item.img.attr('src', item.src);
+				
+				// Optional: 
+				// window.picturefill();
 			}
 
 
